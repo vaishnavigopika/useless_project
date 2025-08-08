@@ -15,25 +15,25 @@ const allExcuses = [
 const btn = document.getElementById("doLaterBtn");
 const excuseText = document.getElementById("excuseText");
 
-// 👇 Add this exactly as it is — this sets up the Hello Kitty confetti
+// Confetti settings
 const confettiSettings = {
   target: 'confetti-canvas',
-  max: 40,
-  size: 1.2,
+  max: 150, // Maximum number of confetti pieces
+  size: 1.2, // Size of confetti
   animate: true,
-  props: ['circle'],
-  clock: 20,
+  props: ['circle', 'square', 'triangle', 'line'], // Shapes of confetti
+  colors: [[255, 78, 138], [255, 142, 179], [255, 255, 255]], // Pink and white colors
+  clock: 25,
   rotate: true,
   width: window.innerWidth,
   height: window.innerHeight,
-  start_from_edge: true,
-  respawn: false,
-  images: [],
+  start_from_edge: false,
+  respawn: true
 };
 
 const confetti = new ConfettiGenerator(confettiSettings);
 
-// 👇 Main button click logic
+// Button click logic
 btn.addEventListener('click', () => {
   // Select a random excuse
   const randomExcuse = allExcuses[Math.floor(Math.random() * allExcuses.length)];
@@ -42,10 +42,9 @@ btn.addEventListener('click', () => {
   excuseText.textContent = randomExcuse;
   excuseText.style.display = "block";
 
-  // Clear previous confetti and trigger new confetti
-  confetti.clear();
+  // Trigger confetti
   confetti.render();
 
-  // Stop it after a short delay
-  setTimeout(() => confetti.clear(), 1000);
+  // Stop confetti after 3 seconds
+  setTimeout(() => confetti.clear(), 3000);
 });
