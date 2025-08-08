@@ -11,10 +11,16 @@ const excuses = [
   "I need to find the perfect playlist first."
 ];
 
-const btn = document.getElementById('doLaterBtn');
-const excuseText = document.getElementById('excuseText');
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("doLaterBtn");
+  const excuseText = document.getElementById("excuseText");
 
-btn.addEventListener('click', () => {
-  const excuse = excuses[Math.floor(Math.random() * excuses.length)];
-  excuseText.textContent = excuse;
+  btn.addEventListener("click", () => {
+    // Select a random excuse from the array
+    const randomExcuse = excuses[Math.floor(Math.random() * excuses.length)];
+    
+    // Show the random excuse
+    excuseText.textContent = randomExcuse;
+    excuseText.style.display = "block";
+  });
 });

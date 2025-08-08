@@ -3,7 +3,9 @@ body, html {
   height: 100%;
   margin: 0;
   padding: 0;
-  background: linear-gradient(135deg, #ffe3e3, #e0c3fc);
+  background: linear-gradient(135deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1); /* Updated vibrant gradient */
+  background-size: 400% 400%; /* Smooth gradient animation */
+  animation: gradientBG 15s ease infinite; /* Add animation for a dynamic effect */
   font-family: 'Comic Sans MS', cursive, sans-serif;
   display: flex;
   flex-direction: column;
@@ -11,16 +13,22 @@ body, html {
   justify-content: center;
 }
 
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 /* Button Styling */
 .btn {
-  padding: 20px 50px;
-  background: linear-gradient(135deg, #F786AA, #00f2fe);
-  color: white;
-  font-family: 'Oi', cursive;
-  font-size: 1.8em;
-  font-weight: bold;
-  border: none;
-  border-radius: 15px;
+  padding: 30px 70px; /* Increased padding for larger button size */
+  background: linear-gradient(135deg, #ff4e8a, #ff8eb3); /* Vibrant pink gradient */
+  color: #FFFFFF;
+  font-family: 'Meow Script', cursive;
+  font-size: 2.5em; /* Increased font size */
+  font-weight: normal;
+  border: none; /* Removed border */
+  border-radius: 20px;
   cursor: pointer;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
@@ -40,6 +48,7 @@ body, html {
   margin-top: 30px;
   font-size: 1.5em;
   color: #222;
+  font-family: 'Oldenburg', cursive; /* Updated font */
   max-width: 80%;
   text-align: center;
   background-color: rgba(255, 255, 255, 0.7);
@@ -47,6 +56,7 @@ body, html {
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   animation: fadeIn 0.4s ease;
+  display: none; /* Hide by default */
 }
 
 @keyframes fadeIn {
