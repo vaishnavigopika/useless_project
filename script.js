@@ -13,14 +13,8 @@ const excuses = [
 
 const btn = document.getElementById('doLaterBtn');
 const excuseText = document.getElementById('excuseText');
-const popSound = document.getElementById('popSound');
 
 btn.addEventListener('click', () => {
-  // Play click sound
-  popSound.currentTime = 0;
-  popSound.play();
-
-  // Generate random excuse
   const excuse = excuses[Math.floor(Math.random() * excuses.length)];
   excuseText.textContent = excuse;
 });

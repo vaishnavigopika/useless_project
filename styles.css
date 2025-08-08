@@ -1,4 +1,4 @@
-/* Background and overall layout */
+/* Background and layout */
 body, html {
   height: 100%;
   margin: 0;
@@ -9,34 +9,32 @@ body, html {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: background 0.5s ease;
 }
 
 /* Button Styling */
 .btn {
-  position: relative;
   padding: 20px 50px;
-  background: linear-gradient(135deg, #F786AA, #00f2fe); /* Updated colors */
-  color: #F786AA; /* Changed font color */
+  background: linear-gradient(135deg, #F786AA, #00f2fe);
+  color: white;
   font-size: 1.8em;
   font-weight: bold;
   border: none;
   border-radius: 15px;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.25);
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn:hover {
   transform: scale(1.05);
-  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.3);
 }
 
 .btn:active {
   transform: scale(1.1);
 }
 
-/* Excuse Text Styling */
+/* Excuse Styling */
 .excuse {
   margin-top: 30px;
   font-size: 1.5em;
@@ -50,7 +48,6 @@ body, html {
   animation: fadeIn 0.4s ease;
 }
 
-/* Fade-in animation */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
