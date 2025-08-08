@@ -11,10 +11,9 @@ const allExcuses = [
   "I need to find the perfect playlist first."
 ];
 
-let remainingExcuses = [...allExcuses];
-
-const btn = document.getElementById('doLaterBtn');
-const excuseText = document.getElementById('excuseText');
+// Select the button and excuse elements
+const btn = document.getElementById("doLaterBtn");
+const excuseText = document.getElementById("excuseText");
 
 // 👇 Add this exactly as it is — this sets up the Hello Kitty confetti
 const confettiSettings = {
@@ -42,17 +41,12 @@ const confetti = new ConfettiGenerator(confettiSettings);
 
 // 👇 Main button click logic
 btn.addEventListener('click', () => {
-  if (remainingExcuses.length === 0) {
-    excuseText.textContent = "You’ve run out of excuses. Time to actually work!";
-    btn.disabled = true;
-    btn.textContent = "No More Excuses";
-    return;
-  }
+  // Select a random excuse
+  const randomExcuse = allExcuses[Math.floor(Math.random() * allExcuses.length)];
 
-  // Get a random excuse that hasn't been used
-  const randomIndex = Math.floor(Math.random() * remainingExcuses.length);
-  const excuse = remainingExcuses.splice(randomIndex, 1)[0];
-  excuseText.textContent = excuse;
+  // Display the excuse
+  excuseText.textContent = randomExcuse;
+  excuseText.style.display = "block";
 
   // Trigger confetti
   confetti.render();
