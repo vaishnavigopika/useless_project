@@ -81,6 +81,8 @@ class ProcrastinationGenerator {
         this.bindEvents();
         this.bindCategoryEvents();
         this.loadAudio();
+        // Initialize scroll button states
+        setTimeout(() => this.updateScrollButtons(), 100);
     }
 
     loadAudio() {
@@ -95,12 +97,22 @@ class ProcrastinationGenerator {
         const favoriteBtn = document.getElementById('favoriteBtn');
         const closeModal = document.getElementById('closeModal');
         const favoritesModal = document.getElementById('favoritesModal');
+        const scrollLeftBtn = document.getElementById('scrollLeft');
+        const scrollRightBtn = document.getElementById('scrollRight');
+        const ideasContainer = document.getElementById('ideasContainer');
 
         generateBtn.addEventListener('click', () => this.generateExcuse());
         shareBtn.addEventListener('click', () => this.shareExcuse());
         favoritesBtn.addEventListener('click', () => this.showFavorites());
         favoriteBtn.addEventListener('click', () => this.toggleFavorite());
         closeModal.addEventListener('click', () => this.closeModal());
+        
+        // Scroll button events
+        scrollLeftBtn.addEventListener('click', () => this.scrollIdeas('left'));
+        scrollRightBtn.addEventListener('click', () => this.scrollIdeas('right'));
+        
+        // Update scroll button states on scroll
+        ideasContainer.addEventListener('scroll', () => this.updateScrollButtons());
         
         favoritesModal.addEventListener('click', (e) => {
             if (e.target === favoritesModal) {
@@ -118,6 +130,13 @@ class ProcrastinationGenerator {
             }
             if (e.key === 'Escape') {
                 this.closeModal();
+            }
+            // Arrow key navigation for ideas
+            if (e.key === 'ArrowLeft') {
+                this.scrollIdeas('left');
+            }
+            if (e.key === 'ArrowRight') {
+                this.scrollIdeas('right');
             }
         });
     }
@@ -424,6 +443,30 @@ class ProcrastinationGenerator {
                 }
             }, 300);
         }, 3000);
+    }
+
+    scrollIdeas(direction) {
+        const container = document.getElementById('ideasContainer');
+        const scrollAmount = 300; // Adjust scroll distance
+        
+        if (direction === 'left') {
+            container.scrollLeft -= scrollAmount;
+        } else {
+            container.scrollLeft += scrollAmount;
+        }
+    }
+
+    updateScrollButtons() {
+        const container = document.getElementById('ideasContainer');
+        const scrollLeftBtn = document.getElementById('scrollLeft');
+        const scrollRightBtn = document.getElementById('scrollRight');
+        
+        // Disable left button if at the start
+        scrollLeftBtn.disabled = container.scrollLeft <= 0;
+        
+        // Disable right button if at the end
+        const maxScroll = container.scrollWidth - container.clientWidth;
+        scrollRightBtn.disabled = container.scrollLeft >= maxScroll - 1;
     }
 }
 

@@ -26,6 +26,11 @@
                     <div class="excuse-category" id="excuseCategory"></div>
                 </div>
                 
+                <button class="generate-btn" id="generateBtn">
+                    <span class="btn-text">Generate Excuse</span>
+                    <span class="btn-icon">🎲</span>
+                </button>
+                
                 <div class="category-selection">
                     <h3>Choose Your Procrastination Category</h3>
                     <div class="category-buttons">
@@ -38,11 +43,6 @@
                     </div>
                 </div>
                 
-                <button class="generate-btn" id="generateBtn">
-                    <span class="btn-text">Generate Excuse</span>
-                    <span class="btn-icon">🎲</span>
-                </button>
-                
                 <div class="excuse-actions">
                     <button class="action-btn" id="shareBtn">📤 Share</button>
                     <button class="action-btn" id="favoritesBtn">❤️ View Favorites</button>
@@ -52,37 +52,133 @@
 
             <div class="extra-ideas">
                 <h3>🎨 Extra Procrastination Ideas</h3>
-                <div class="ideas-grid">
-                    <div class="idea-card">
-                        <div class="idea-icon">🧹</div>
-                        <h4>Productive Procrastination</h4>
-                        <p>Clean your entire house instead of doing that important task. At least something gets done!</p>
+                <div class="scroll-navigation">
+                    <button class="scroll-btn scroll-left" id="scrollLeft">‹</button>
+                    <div class="ideas-scroll-container" id="ideasContainer">
+                        <div class="ideas-grid">
+                            <div class="idea-card">
+                                <div class="idea-icon">🧹</div>
+                                <h4>Productive Procrastination</h4>
+                                <p>Clean your entire house instead of doing that important task. At least something gets done!</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">📚</div>
+                                <h4>Research Rabbit Hole</h4>
+                                <p>Start researching your task and end up reading about medieval cooking techniques for 3 hours.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🎵</div>
+                                <h4>Perfect Playlist</h4>
+                                <p>Spend 2 hours creating the "perfect" work playlist. The work can wait, vibes are important!</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">☕</div>
+                                <h4>Coffee Ceremony</h4>
+                                <p>Make the most elaborate coffee possible. Grind beans, perfect the temperature, Instagram it.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">📱</div>
+                                <h4>Social Media Detective</h4>
+                                <p>Check what your high school classmates are up to. It's important to stay connected, right?</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🧘</div>
+                                <h4>Sudden Self-Care</h4>
+                                <p>Decide that mental health is priority #1 and take a 3-hour "mindfulness" break.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🛒</div>
+                                <h4>Emergency Shopping</h4>
+                                <p>Suddenly realize you need new pens, notebooks, or that perfect desk organizer before you can work.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🍳</div>
+                                <h4>Gourmet Cooking</h4>
+                                <p>Decide to cook an elaborate meal because "proper nutrition is essential for brain function."</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">📧</div>
+                                <h4>Email Archaeology</h4>
+                                <p>Organize your entire inbox, unsubscribe from newsletters, and achieve the mythical "Inbox Zero."</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🎮</div>
+                                <h4>Quick Game Break</h4>
+                                <p>Play "just one quick game" that somehow turns into a 4-hour gaming marathon.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">📺</div>
+                                <h4>Educational YouTube</h4>
+                                <p>Watch "educational" videos that start with productivity tips and end with cat compilations.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🧼</div>
+                                <h4>Deep Clean Mode</h4>
+                                <p>Clean behind the refrigerator, organize the junk drawer, and alphabetize your spice rack.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">💤</div>
+                                <h4>Power Nap Strategy</h4>
+                                <p>Take a "quick 20-minute nap" to boost productivity. Wake up 3 hours later, more confused.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">📖</div>
+                                <h4>Skill Learning Detour</h4>
+                                <p>Start learning a completely unrelated skill like origami or juggling "for personal development."</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🌱</div>
+                                <h4>Plant Parent Mode</h4>
+                                <p>Suddenly become obsessed with plant care, repotting, and researching the perfect fertilizer.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">📷</div>
+                                <h4>Photo Organization</h4>
+                                <p>Organize 10,000 photos on your phone and create the perfect Instagram story about productivity.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🎨</div>
+                                <h4>Creative Burst</h4>
+                                <p>Suddenly feel inspired to draw, paint, or start that novel you've been thinking about for years.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🧮</div>
+                                <h4>Budget Planning</h4>
+                                <p>Create elaborate spreadsheets to track every penny and plan your financial future in detail.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🎯</div>
+                                <h4>Goal Setting Session</h4>
+                                <p>Spend hours creating vision boards and setting SMART goals instead of working on current ones.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🔧</div>
+                                <h4>Tech Optimization</h4>
+                                <p>Update all software, reorganize desktop icons, and optimize computer performance for "better productivity."</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🎪</div>
+                                <h4>Event Planning</h4>
+                                <p>Plan elaborate future events, vacations, or parties that may or may not actually happen.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🏃‍♀️</div>
+                                <h4>Fitness Research</h4>
+                                <p>Research the perfect workout routine, read about nutrition, and plan a complete lifestyle overhaul.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🎭</div>
+                                <h4>Personality Tests</h4>
+                                <p>Take every personality test online to "better understand yourself" and improve work performance.</p>
+                            </div>
+                            <div class="idea-card">
+                                <div class="idea-icon">🌟</div>
+                                <h4>Inspiration Hunt</h4>
+                                <p>Browse Pinterest, TikTok, or Instagram for "inspiration" and end up in a 2-hour scroll session.</p>
+                            </div>
+                        </div>
                     </div>
-                    <div class="idea-card">
-                        <div class="idea-icon">📚</div>
-                        <h4>Research Rabbit Hole</h4>
-                        <p>Start researching your task and end up reading about medieval cooking techniques for 3 hours.</p>
-                    </div>
-                    <div class="idea-card">
-                        <div class="idea-icon">🎵</div>
-                        <h4>Perfect Playlist</h4>
-                        <p>Spend 2 hours creating the "perfect" work playlist. The work can wait, vibes are important!</p>
-                    </div>
-                    <div class="idea-card">
-                        <div class="idea-icon">☕</div>
-                        <h4>Coffee Ceremony</h4>
-                        <p>Make the most elaborate coffee possible. Grind beans, perfect the temperature, Instagram it.</p>
-                    </div>
-                    <div class="idea-card">
-                        <div class="idea-icon">📱</div>
-                        <h4>Social Media Detective</h4>
-                        <p>Check what your high school classmates are up to. It's important to stay connected, right?</p>
-                    </div>
-                    <div class="idea-card">
-                        <div class="idea-icon">🧘</div>
-                        <h4>Sudden Self-Care</h4>
-                        <p>Decide that mental health is priority #1 and take a 3-hour "mindfulness" break.</p>
-                    </div>
+                    <button class="scroll-btn scroll-right" id="scrollRight">›</button>
                 </div>
             </div>
 
