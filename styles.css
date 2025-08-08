@@ -16,7 +16,7 @@ body, html {
 .btn {
   position: relative;
   padding: 20px 50px;
-  background: linear-gradient(135deg, #4facfe, #00f2fe); /* Updated colors */
+  background: linear-gradient(135deg, #F786AA, #00f2fe); /* Updated colors */
   color: #fff;
   font-size: 1.8em;
   font-weight: bold;
