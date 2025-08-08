@@ -71,6 +71,7 @@ class ProcrastinationGenerator {
 
         this.history = JSON.parse(localStorage.getItem('excuseHistory')) || [];
         this.favorites = JSON.parse(localStorage.getItem('favorites')) || [];
+        this.selectedCategory = 'all';
 
         this.init();
     }
@@ -78,6 +79,7 @@ class ProcrastinationGenerator {
     init() {
         this.updateStats();
         this.bindEvents();
+        this.bindCategoryEvents();
         this.loadAudio();
     }
 
@@ -89,19 +91,19 @@ class ProcrastinationGenerator {
     bindEvents() {
         const generateBtn = document.getElementById('generateBtn');
         const shareBtn = document.getElementById('shareBtn');
-        const historyBtn = document.getElementById('historyBtn');
+        const favoritesBtn = document.getElementById('favoritesBtn');
         const favoriteBtn = document.getElementById('favoriteBtn');
         const closeModal = document.getElementById('closeModal');
-        const historyModal = document.getElementById('historyModal');
+        const favoritesModal = document.getElementById('favoritesModal');
 
         generateBtn.addEventListener('click', () => this.generateExcuse());
         shareBtn.addEventListener('click', () => this.shareExcuse());
-        historyBtn.addEventListener('click', () => this.showHistory());
+        favoritesBtn.addEventListener('click', () => this.showFavorites());
         favoriteBtn.addEventListener('click', () => this.toggleFavorite());
         closeModal.addEventListener('click', () => this.closeModal());
         
-        historyModal.addEventListener('click', (e) => {
-            if (e.target === historyModal) {
+        favoritesModal.addEventListener('click', (e) => {
+            if (e.target === favoritesModal) {
                 this.closeModal();
             }
         });
@@ -120,9 +122,30 @@ class ProcrastinationGenerator {
         });
     }
 
+    bindCategoryEvents() {
+        const categoryBtns = document.querySelectorAll('.category-btn');
+        categoryBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                // Remove active class from all buttons
+                categoryBtns.forEach(b => b.classList.remove('active'));
+                // Add active class to clicked button
+                e.target.classList.add('active');
+                // Update selected category
+                this.selectedCategory = e.target.dataset.category;
+            });
+        });
+    }
+
     generateExcuse() {
-        const categories = Object.keys(this.excuses);
-        const randomCategory = categories[Math.floor(Math.random() * categories.length)];
+        let availableCategories;
+        
+        if (this.selectedCategory === 'all') {
+            availableCategories = Object.keys(this.excuses);
+        } else {
+            availableCategories = [this.selectedCategory];
+        }
+        
+        const randomCategory = availableCategories[Math.floor(Math.random() * availableCategories.length)];
         const categoryExcuses = this.excuses[randomCategory];
         const randomExcuse = categoryExcuses[Math.floor(Math.random() * categoryExcuses.length)];
 
@@ -135,6 +158,9 @@ class ProcrastinationGenerator {
             this.popSound.currentTime = 0;
             this.popSound.play().catch(e => console.log('Audio play failed:', e));
         }
+
+        // Trigger confetti celebration
+        this.triggerConfetti();
 
         // Animate the card
         const excuseCard = document.querySelector('.excuse-card');
@@ -163,7 +189,7 @@ class ProcrastinationGenerator {
 
         // Update stats
         this.stats.totalExcuses++;
-        this.stats.timeWasted += Math.floor(Math.random() * 30) + 5; // Random time between 5-35 minutes
+        this.stats.timeWasted += Math.floor(Math.random() * 30) + 5;
         
         // Add to history
         const historyItem = {
@@ -174,7 +200,6 @@ class ProcrastinationGenerator {
         };
         this.history.unshift(historyItem);
         
-        // Keep only last 50 excuses
         if (this.history.length > 50) {
             this.history = this.history.slice(0, 50);
         }
@@ -240,30 +265,103 @@ class ProcrastinationGenerator {
         this.updateStats();
     }
 
-    showHistory() {
-        const historyModal = document.getElementById('historyModal');
-        const historyList = document.getElementById('historyList');
+    showFavorites() {
+        const favoritesModal = document.getElementById('favoritesModal');
+        const favoritesList = document.getElementById('favoritesList');
         
-        if (this.history.length === 0) {
-            historyList.innerHTML = '<p class="empty-history">No excuses generated yet. Start procrastinating!</p>';
+        if (this.favorites.length === 0) {
+            favoritesList.innerHTML = '<p class="empty-favorites">No favorite excuses yet. Generate some and add them to favorites!</p>';
         } else {
-            historyList.innerHTML = this.history.map(item => `
-                <div class="history-item">
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
-                        <span class="excuse-category" style="margin: 0;">${item.category}</span>
-                        <small style="color: #a0aec0;">${item.timestamp}</small>
-                    </div>
-                    <p style="margin: 0; line-height: 1.5;">${item.excuse}</p>
+            favoritesList.innerHTML = this.favorites.map(item => `
+            <div class="favorite-item">
+                <button class="remove-favorite" onclick="procrastinationApp.removeFavorite(${item.id})" title="Remove from favorites">×</button>
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                    <span class="excuse-category" style="margin: 0;">${item.category}</span>
+                    <small style="color: #a0aec0;">${item.timestamp}</small>
                 </div>
-            `).join('');
+                <p style="margin: 0; line-height: 1.5; padding-right: 30px;">${item.excuse}</p>
+            </div>
+        `).join('');
         }
         
-        historyModal.style.display = 'block';
+        favoritesModal.style.display = 'block';
+    }
+
+    removeFavorite(id) {
+        this.favorites = this.favorites.filter(fav => fav.id !== id);
+        this.stats.favoriteCount = this.favorites.length;
+        this.saveData();
+        this.updateStats();
+        this.showFavorites(); // Refresh the favorites display
+        this.showNotification('Removed from favorites');
+    }
+
+    triggerConfetti() {
+        const canvas = document.getElementById('confetti-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // Set canvas size
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        
+        const confetti = [];
+        const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#feca57', '#ff9ff3', '#54a0ff'];
+        
+        // Create confetti pieces
+        for (let i = 0; i < 50; i++) {
+            confetti.push({
+                x: Math.random() * canvas.width,
+                y: -10,
+                vx: (Math.random() - 0.5) * 4,
+                vy: Math.random() * 3 + 2,
+                color: colors[Math.floor(Math.random() * colors.length)],
+                size: Math.random() * 8 + 4,
+                rotation: Math.random() * 360,
+                rotationSpeed: (Math.random() - 0.5) * 10
+            });
+        }
+        
+        const animate = () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            for (let i = confetti.length - 1; i >= 0; i--) {
+                const piece = confetti[i];
+                
+                // Update position
+                piece.x += piece.vx;
+                piece.y += piece.vy;
+                piece.rotation += piece.rotationSpeed;
+                
+                // Apply gravity
+                piece.vy += 0.1;
+                
+                // Draw confetti piece
+                ctx.save();
+                ctx.translate(piece.x, piece.y);
+                ctx.rotate(piece.rotation * Math.PI / 180);
+                ctx.fillStyle = piece.color;
+                ctx.fillRect(-piece.size/2, -piece.size/2, piece.size, piece.size);
+                ctx.restore();
+                
+                // Remove confetti that's off screen
+                if (piece.y > canvas.height + 10) {
+                    confetti.splice(i, 1);
+                }
+            }
+            
+            if (confetti.length > 0) {
+                requestAnimationFrame(animate);
+            }
+        };
+        
+        animate();
     }
 
     closeModal() {
         const historyModal = document.getElementById('historyModal');
-        historyModal.style.display = 'none';
+        const favoritesModal = document.getElementById('favoritesModal');
+        if(historyModal) historyModal.style.display = 'none';
+        if(favoritesModal) favoritesModal.style.display = 'none';
     }
 
     updateStats() {
@@ -329,9 +427,12 @@ class ProcrastinationGenerator {
     }
 }
 
+// Make the app globally accessible for remove favorite functionality
+let procrastinationApp;
+
 // Initialize the app when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new ProcrastinationGenerator();
+    procrastinationApp = new ProcrastinationGenerator();
 });
 
 // Add some fun easter eggs

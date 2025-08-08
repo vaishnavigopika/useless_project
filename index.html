@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <canvas id="confetti-canvas"></canvas>
     <div class="container">
         <header class="header">
             <h1 class="title">🎭 ProcrastiNation</h1>
@@ -25,6 +26,18 @@
                     <div class="excuse-category" id="excuseCategory"></div>
                 </div>
                 
+                <div class="category-selection">
+                    <h3>Choose Your Procrastination Category</h3>
+                    <div class="category-buttons">
+                        <button class="category-btn active" data-category="all">🎲 All Categories</button>
+                        <button class="category-btn" data-category="work">💼 Work</button>
+                        <button class="category-btn" data-category="exercise">🏃‍♂️ Exercise</button>
+                        <button class="category-btn" data-category="cleaning">🧹 Cleaning</button>
+                        <button class="category-btn" data-category="studying">📚 Studying</button>
+                        <button class="category-btn" data-category="general">🤔 General</button>
+                    </div>
+                </div>
+                
                 <button class="generate-btn" id="generateBtn">
                     <span class="btn-text">Generate Excuse</span>
                     <span class="btn-icon">🎲</span>
@@ -32,8 +45,8 @@
                 
                 <div class="excuse-actions">
                     <button class="action-btn" id="shareBtn">📤 Share</button>
-                    <button class="action-btn" id="historyBtn">📜 History</button>
-                    <button class="action-btn" id="favoriteBtn">❤️ Favorite</button>
+                    <button class="action-btn" id="favoritesBtn">❤️ View Favorites</button>
+                    <button class="action-btn" id="favoriteBtn">🤍 Favorite</button>
                 </div>
             </div>
 
@@ -100,6 +113,18 @@
                 </div>
                 <div class="history-list" id="historyList">
                     <p class="empty-history">No excuses generated yet. Start procrastinating!</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="history-modal" id="favoritesModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalTitle">❤️ Your Favorite Excuses</h3>
+                    <button class="close-btn" id="closeModal">&times;</button>
+                </div>
+                <div class="favorites-list" id="favoritesList">
+                    <p class="empty-favorites">No favorite excuses yet. Generate some and add them to favorites!</p>
                 </div>
             </div>
         </div>
