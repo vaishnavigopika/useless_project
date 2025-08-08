@@ -16,6 +16,7 @@ body, html {
   padding: 20px 50px;
   background: linear-gradient(135deg, #F786AA, #00f2fe);
   color: white;
+  font-family: 'Oi', cursive;
   font-size: 1.8em;
   font-weight: bold;
   border: none;
