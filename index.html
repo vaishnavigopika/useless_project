@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Do It Later Switch</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Do It Later! Burst Switch</title>
   <style>
-    /* Base styling and centering */
+    /* Basic styling */
     body, html {
       height: 100%;
       margin: 0;
@@ -15,58 +15,92 @@
       background: #f0f0f0;
       font-family: sans-serif;
     }
-    label.switch {
+    .container {
       position: relative;
-      display: inline-block;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+    }
+    .container .text {
+      font-size: 1.2em;
+    }
+
+    /* Toggle switch */
+    input[type="checkbox"] {
+      appearance: none;
       width: 60px;
       height: 34px;
-    }
-    label.switch input {
-      opacity: 0;
-      width: 0;
-      height: 0;
-    }
-    .slider {
-      position: absolute;
+      background: #ccc;
+      border-radius: 17px;
+      position: relative;
+      outline: none;
       cursor: pointer;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background-color: #ccc;
-      transition: 0.4s;
-      border-radius: 34px;
+      transition: background-color 0.3s;
     }
-    .slider:before {
-      position: absolute;
+    input[type="checkbox"]::before {
       content: "";
-      height: 26px; width: 26px;
-      left: 4px; bottom: 4px;
-      background-color: white;
-      transition: 0.4s;
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 26px;
+      height: 26px;
+      background: white;
       border-radius: 50%;
+      transition: transform 0.3s;
     }
-    input:checked + .slider {
-      background-color: #2196F3;
+    input[type="checkbox"]:checked {
+      background-color: #FF4081;
     }
-    input:focus + .slider {
-      box-shadow: 0 0 1px #2196F3;
-    }
-    input:checked + .slider:before {
+    input[type="checkbox"]:checked::before {
       transform: translateX(26px);
+    }
+
+    /* Burst animation */
+    .burst {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #FF4081;
+      border-radius: 50%;
+      pointer-events: none;
+    }
+    @keyframes burst {
+      0% { transform: scale(1) translate(0, 0); opacity: 1; }
+      100% { transform: scale(0) translate(100px, -50px); opacity: 0; }
+    }
+    .burst.animate {
+      animation: burst 0.6s ease-out forwards;
     }
   </style>
 </head>
 <body>
-
-  <label class="switch">
-    <input type="checkbox" id="do-it-later" role="switch" aria-checked="false">
-    <span class="slider"></span>
-  </label>
+  <div class="container">
+    <label class="switch">
+      <span class="text">Do It Later!</span>
+      <input type="checkbox" id="do-it-later" role="switch" aria-checked="false">
+    </label>
+  </div>
 
   <script>
     const toggle = document.getElementById('do-it-later');
-    toggle.addEventListener('change', () => {
-      const state = toggle.checked ? 'ON' : 'OFF';
+    toggle.addEventListener('change', (e) => {
       toggle.setAttribute('aria-checked', toggle.checked);
-      console.log(`Procrastination mode: ${state}`);
+
+      // Create burst element
+      const burst = document.createElement('div');
+      burst.classList.add('burst');
+      document.body.appendChild(burst);
+
+      // Position burst at toggle location
+      const rect = toggle.getBoundingClientRect();
+      burst.style.left = (rect.left + rect.width / 2 - 5) + 'px';
+      burst.style.top = (rect.top + rect.height / 2 - 5) + 'px';
+
+      // Start animation
+      requestAnimationFrame(() => burst.classList.add('animate'));
+
+      // Remove after animation ends
+      burst.addEventListener('animationend', () => burst.remove());
     });
   </script>
 </body>
