@@ -1,67 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Do It Later!</title>
-<style>
-  body, html {
-    height: 100%; margin: 0;
-    display: flex; align-items: center; justify-content: center;
-    background: #fdfdfd; font-family: Arial, sans-serif;
-  }
-  .btn {
-    position: relative;
-    padding: 20px 40px;
-    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
-    color: #fff; font-size: 1.5em; font-weight: bold;
-    border: none; border-radius: 10px; cursor: pointer;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-    transition: transform 0.15s ease, box-shadow 0.15s ease;
-    overflow: hidden;
-  }
-  .btn:active {
-    transform: scale(1.1);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
-  }
-  .excuse {
-    margin-top: 20px;
-    font-size: 1.2em;
-    color: #333;
-    max-width: 80%;
-    text-align: center;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Do It Later!</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
 
-<button class="btn" id="doLaterBtn">Do It Later!</button>
-<div class="excuse" id="excuseText"></div>
+  <button class="btn" id="doLaterBtn">Do It Later!</button>
+  <div class="excuse" id="excuseText"></div>
 
-<script>
-  const excuses = [
-    "Need to reorganize my sock drawer.",
-    "Let me just make one more cup of tea.",
-    "My goldfish needs emotional support.",
-    "I forgot how to start.",
-    "Polishing my procrastination skills.",
-    "Am I even human without this?"
-  ];
-
-  const btn = document.getElementById('doLaterBtn');
-  const excuseText = document.getElementById('excuseText');
-  const popSound = new Audio('pop.mp3');
-
-  btn.addEventListener('click', () => {
-    // Play click sound
-    popSound.currentTime = 0;
-    popSound.play();
-
-    // Generate random excuse
-    const excuse = excuses[Math.floor(Math.random() * excuses.length)];
-    excuseText.textContent = excuse;
-  });
-</script>
-
+  <audio id="popSound" src="assets/pop.mp3"></audio>
+  <script src="script.js"></script>
 </body>
 </html>

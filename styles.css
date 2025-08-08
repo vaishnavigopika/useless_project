@@ -1,0 +1,57 @@
+/* Background and overall layout */
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(135deg, #ffe3e3, #e0c3fc);
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.5s ease;
+}
+
+/* Button Styling */
+.btn {
+  position: relative;
+  padding: 20px 50px;
+  background: linear-gradient(135deg, #ff6f91, #ff9671);
+  color: #fff;
+  font-size: 1.8em;
+  font-weight: bold;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 25px rgba(0,0,0,0.3);
+}
+
+.btn:active {
+  transform: scale(1.1);
+}
+
+/* Excuse Text Styling */
+.excuse {
+  margin-top: 30px;
+  font-size: 1.5em;
+  color: #222;
+  max-width: 80%;
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.7);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.4s ease;
+}
+
+/* Fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
