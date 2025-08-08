@@ -1,18 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Do It Later!</title>
-  <link href="https://fonts.googleapis.com/css2?family=Meow+Script&family=Oldenburg&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
-  <script src="https://cdn.jsdelivr.net/npm/confetti-js@0.0.18/dist/index.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProcrastiNation - The Art of Creative Delays</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+        <header class="header">
+            <h1 class="title">🎭 ProcrastiNation</h1>
+            <p class="subtitle">The Art of Creative Delays</p>
+        </header>
 
-  <button class="btn" id="doLaterBtn">Do It Later!</button>
-  <div class="excuse" id="excuseText"></div>
-  <canvas id="confetti-canvas"></canvas>
-  <script src="script.js"></script>
+        <main class="main-content">
+            <div class="excuse-generator">
+                <div class="excuse-card">
+                    <div class="excuse-icon">🤔</div>
+                    <h2>Your Perfect Excuse</h2>
+                    <div class="excuse-text" id="excuseText">
+                        Click the button below to generate your perfectly crafted excuse for procrastination!
+                    </div>
+                    <div class="excuse-category" id="excuseCategory"></div>
+                </div>
+                
+                <button class="generate-btn" id="generateBtn">
+                    <span class="btn-text">Generate Excuse</span>
+                    <span class="btn-icon">🎲</span>
+                </button>
+                
+                <div class="excuse-actions">
+                    <button class="action-btn" id="shareBtn">📤 Share</button>
+                    <button class="action-btn" id="historyBtn">📜 History</button>
+                    <button class="action-btn" id="favoriteBtn">❤️ Favorite</button>
+                </div>
+            </div>
+
+            <div class="extra-ideas">
+                <h3>🎨 Extra Procrastination Ideas</h3>
+                <div class="ideas-grid">
+                    <div class="idea-card">
+                        <div class="idea-icon">🧹</div>
+                        <h4>Productive Procrastination</h4>
+                        <p>Clean your entire house instead of doing that important task. At least something gets done!</p>
+                    </div>
+                    <div class="idea-card">
+                        <div class="idea-icon">📚</div>
+                        <h4>Research Rabbit Hole</h4>
+                        <p>Start researching your task and end up reading about medieval cooking techniques for 3 hours.</p>
+                    </div>
+                    <div class="idea-card">
+                        <div class="idea-icon">🎵</div>
+                        <h4>Perfect Playlist</h4>
+                        <p>Spend 2 hours creating the "perfect" work playlist. The work can wait, vibes are important!</p>
+                    </div>
+                    <div class="idea-card">
+                        <div class="idea-icon">☕</div>
+                        <h4>Coffee Ceremony</h4>
+                        <p>Make the most elaborate coffee possible. Grind beans, perfect the temperature, Instagram it.</p>
+                    </div>
+                    <div class="idea-card">
+                        <div class="idea-icon">📱</div>
+                        <h4>Social Media Detective</h4>
+                        <p>Check what your high school classmates are up to. It's important to stay connected, right?</p>
+                    </div>
+                    <div class="idea-card">
+                        <div class="idea-icon">🧘</div>
+                        <h4>Sudden Self-Care</h4>
+                        <p>Decide that mental health is priority #1 and take a 3-hour "mindfulness" break.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="stats-section">
+                <h3>📊 Your Procrastination Stats</h3>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalExcuses">0</div>
+                        <div class="stat-label">Excuses Generated</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="favoriteCount">0</div>
+                        <div class="stat-label">Favorites</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="timeWasted">0</div>
+                        <div class="stat-label">Minutes "Saved"</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <div class="history-modal" id="historyModal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>📜 Excuse History</h3>
+                    <button class="close-btn" id="closeModal">&times;</button>
+                </div>
+                <div class="history-list" id="historyList">
+                    <p class="empty-history">No excuses generated yet. Start procrastinating!</p>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>Made with ❤️ and a lot of procrastination</p>
+            <p class="disclaimer">*This website is for entertainment purposes. Please don't actually use these excuses... or do, we're not your boss! 😄</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
