@@ -21,20 +21,14 @@ const confettiSettings = {
   max: 40,
   size: 1.2,
   animate: true,
-  props: ['image'],
+  props: ['circle'],
   clock: 20,
   rotate: true,
   width: window.innerWidth,
   height: window.innerHeight,
   start_from_edge: true,
   respawn: false,
-  images: [
-    {
-      src: 'assets/hello-kitty.png', // Make sure this image is placed in assets/
-      width: 32,
-      height: 32
-    }
-  ]
+  images: [],
 };
 
 const confetti = new ConfettiGenerator(confettiSettings);
@@ -48,7 +42,8 @@ btn.addEventListener('click', () => {
   excuseText.textContent = randomExcuse;
   excuseText.style.display = "block";
 
-  // Trigger confetti
+  // Clear previous confetti and trigger new confetti
+  confetti.clear();
   confetti.render();
 
   // Stop it after a short delay
